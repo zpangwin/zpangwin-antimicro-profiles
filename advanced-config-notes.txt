@@ -1,0 +1,508 @@
+# Notes on Advanced AntiMicroX Configs
+
+These are my notes on setting up more advanced antimicrox configs. They are not comprehensive but I plan to add to them going forward whenever I write any AMX profiles that go beyond a simple input->output setup.
+
+---
+
+## TOC:
+
+- [1. Wiki Pages](#wiki-links)
+- [2. My notes on the Advanced dialog (GUI)](#gui-notes)
+- [3. Tested Snippets](#tested-snippets)
+- [3.1 Run a program or script when gamepad input button is pressed](#snippet-to-run-a-script)
+- [3.2 Double-tap input button mapping](#snippet-for-double-tap)
+- [3.3 Single-tap and hold mappings for same input button](#snippet-for-tap-and-hold)
+- [3.4 Hold and double-tap mappings for same input button](#snippet-for-hold-plus-double-tap)
+- [3.5 triple-tap](#triple-tap)
+- [3.6 WIP / Other combos](#wip-other-combos)
+- [4. Interesting feature requests/issues/discussions](#bookmarked-issues)
+
+---
+
+
+## [1. Wiki Pages](#wiki-links)
+
+These pages from the official AntiMicroX wiki are particularly helpful for advanced configs:
+
+- [https://github.com/AntiMicroX/antimicrox/wiki/Advanced-Assignments](https://github.com/AntiMicroX/antimicrox/wiki/Advanced-Assignments)
+- [https://github.com/AntiMicroX/antimicrox/wiki/Advanced-Slot-Explanation](https://github.com/AntiMicroX/antimicrox/wiki/Advanced-Slot-Explanation)
+- [https://github.com/AntiMicroX/antimicrox/wiki/Methods-for-Disabling-Joystick-Reading-in-Linux](https://github.com/AntiMicroX/antimicrox/wiki/Methods-for-Disabling-Joystick-Reading-in-Linux)
+
+
+
+## [2. My notes on the Advanced dialog (GUI)](#gui-notes)
+
+As of AntiMicroX 3.5.1, there is an Advanced dialog screen that can be a bit tricky to use.
+
+There is already a [ticket to redesign this screen](https://github.com/AntiMicroX/antimicrox/issues/284) but it seems as if the primary maintainer, pktiuk, [may be stepping down](https://github.com/AntiMicroX/antimicrox/discussions/1171). I've done some testing for him in the past and he's an awesome guy, but life happens to everyone so completely understandable that he's gotten too busy to be the primary maintainer anymore. Point is, the future of the project is not entirely clear and assuming someone else steps up as maintainer, the priorities may change.
+
+Many find this gui confusing and hard to use for defining anything... well, advanced. When you are trying to understand complex mechanisms and then run into a finicky gui, it's understandable that people would get confused and frustrated. I often find myself wishing for a simpler way to enter things than falls somewhere between the current gui and direct xml editing. I will admit that I prefer json and have never been a huge fan of xml but I think that format was inherited from the original antimicro (not x) project and that backwards compatibility was always a major goal.
+
+I think the main bit of confusion with the UI itself is that depending where exactly you click, the context is greatly different and that is never really documented anywhere or spelled out on-screen. Since it isn't documented and isn't intuitive, that's where people have a hard time.
+
+Now for anyone who prefers editing text, I would probably recommend directly editing the xml file (obviously make backups first though). Ditto for anyone who might have accessibility issues with using the gui (e.g. people who are blind and using screen-readers or someone suffering from RSI for example might have an even harder time with the GUI than normal).
+
+---
+
+Anyway, assuming v3.5.1, let's open the `Advanced` dialog first:
+
+1. Select any gamepad input button, e.g. "Y Button", and click on it to bring up keyboard map
+2. You'll notice an `Advanced` button on the bottom of this dialog. However, it seems that if you click on it, you'll get an error message that ["Before you open window with advanced settings, you have to choice a key"](https://github.com/zpangwin/zpangwin-antimicro-profiles/blob/master/00_images/advanced-dialog-nag-message.png?raw=true). Why this is even necessary, I don't understand and personally, I think you should be able to proceed without selecting one.
+3. Press any key to start with - I recommend one that you won't be using and will show up in notepad as the "wrong one" if you test there later (e.g. if you want to end up with `G`, press `E` for now, etc).
+4. Enter labels for `Name` and `Action`. As far as I can tell, these are only display names and you can use whatever you like.
+5. Now click on the `Advanced` button
+6. Once the `Advanced` dialog window opens, make sure you are on the `Assignments` tab unless otherwise specified.
+
+Now for clarifying the confusing bits...
+
+On the `Advanced` dialog, under the `Assignments` tab, there is a horizontal section that consists of all of the actions to be taken.
+
+When you first start, it will look like two buttons - the first one labeled as whatever keypress was selected from the mapping screen and the second one with no label.
+
+for example, if you selected `E` from the keyboard screen, then you will start with:
+
+    [ E ] [ ]
+
+This horizontal row section actually has different click contexts. I will try to explain them as I understand them. Here is a picture to help visualize what I am talking about.
+
+[advanced-click-zones.png](https://github.com/zpangwin/zpangwin-antimicro-profiles/blob/master/00_images/advanced-dialog-nag-message.png?raw=true)
+
+in this picture, I've divided the row into 3 zones:
+
+- Red zone: the overall row containing each of the "action" cells. There is only 1 of these and you probably can't click it directly so it's more just conceptual.
+- Green zones: Each of these is basically a cell that represents 1 AntimicroX action (keypress, binary/script/executable, delay, cycle, hold, etc). Each cell will contain a single button. All cells that are defined will appear to the left. There will always be 1 additional cell to the right that represents a new cell that *CAN* be added (e.g. it doesn't exist as part of the config until you interact with it/click on it). IMHO, if this was replaced by a Plus button (`+`) that would also cut down on some of the confusion.
+- Purple zones: These are the actual buttons that appear within the green zones.
+
+The main point here is that clicking on one of the buttons (e.g. purple zone) has a different context than clicking somewhere in green zone outside of the button. For the former (purple zone), the click is usually interpretted as "I would like to set a keybind/mousebind". For the latter (green zone), the click is usually interpretted as selecting that cell without making any changes - such as before you insert a new action.
+
+One of the other things I often see people get frustrated / confused by is that there all of this happens without saving the changes - even temporarily. And if you weren't aware: for wireless controllers, if they time-out/power-off, antimicrox 3.5.1 will lose any unsaved changes automatically. There's also no undo button / history.
+
+So, when you are making changes, not only is it a good idea to keep AMX profiles under version control w detailed notes and usage of keywordws like "working" / "wip" / etc, but to also save the profile in AMX frequently - especially if you have a wireless controller.
+
+so if you were trying to define something like this from the wiki:
+
+    Cycle Reset: 0.50 seconds
+    Release 0.01 -> Pause 0.00 -> Release 0.49 -> E -> Cycle -> Release 0.01 -> R
+
+then what this breaks down to in terms of actual, more detailed steps is:
+
+1. Open the advanced dialog (see above) to the `Assignments` tab.
+2. Click `Clear All` button (this will clear the initial key you selected from keyboard screen).
+3. From the drop-downs, select `Release` and choose timing of 0-0-0-1 (e.g. `0m 0.01s` aka `00.01`) then click the `Insert` button.
+4. Your horizontal action row should look like this: `[Release 00.01] [ ]`
+5. Click on empty space IMMEDIATELY BELOW the empty button (`[ ]`) to select the next cell.
+6. From the drop-downs, select `Pause` and choose timing of 0-0-0-0 (e.g. `0m 0.00s` aka `00.00`) then click the `Insert` button.
+7. Your horizontal action row should look like this: `[Release 00.01] [Pause 00.00] [ ]`
+8. Click on empty space IMMEDIATELY BELOW the empty button (`[ ]`) to select the next cell.
+9. From the drop-downs, select `Release` and choose timing of 0-0-4-9 (e.g. `0m 0.49s` aka `00.49`) then click the `Insert` button.
+10. Your horizontal action row should look like this: `[Release 00.01] [Pause 00.00] [Release 00.49] [ ]`
+11. Now, click on the empty button (`[ ]`) at the end and press the key that you want to be triggered as output for the HOLD action (e.g. `A`)
+12. Your horizontal action row should look like this: `[Release 00.01] [Pause 00.00] [Release 00.49] [A] [ ]`
+13. Click on empty space IMMEDIATELY BELOW the empty button (`[ ]`) to select the next cell.
+14. From the drop-downs, select `Cycle`, enable `Auto Reset Cycle` check and choose timing of `0.5` seconds then click the `Insert` button.
+15. Your horizontal action row should look like this: `[Release 00.01] [Pause 00.00] [Release 00.49] [A] [Cycle] [ ]`
+16. Click on empty space IMMEDIATELY BELOW the empty button (`[ ]`) to select the next cell.
+17. Your horizontal action row should look like this: `[Release 00.01] [Pause 00.00] [Release 00.49] [A] [Cycle] [Release 00.01] [ ]`
+18. Now, click on the empty button (`[ ]`) at the end and press the key that you want to be triggered as output for the DOUBLE-TAP action (e.g. `B`)
+19. Your final horizontal action row should look like this: `[Release 00.01] [Pause 00.00] [Release 00.49] [A] [Cycle] [Release 00.01] [B] [ ]`
+
+
+
+## [3. Tested Snippets](#tested-snippets)
+
+
+### [3.1 Run a program or script when gamepad input button is pressed](#snippet-to-run-a-script):
+
+
+**GUI setup:**
+
+1. Open the advanced dialog (see above) to the `Assignments` tab and click `Clear All` button to clear the initial key from keyboard screen.
+2. From drop-down, select `Execute`.
+3. Enter the absolute path in `Executable` and any arguments in `Arguments`.
+4. Click `Insert` button.
+5. Click `Close` button on `Advanced` screen then click `Close` button on keyboard map/assignment screen.
+
+**Test script:**
+
+e.g. with `/usr/local/bin/test-script.sh` containing:
+
+    #!/usr/bin/env bash
+    scriptName='test-wrapper';
+    logFile="/tmp/${scriptName}-$(date +'%F_%H%M%S').log";
+    printf '%s\nstart time: %s\nprocess id: %s\npassed args: %s\n' "${scriptName}" "$(date)" "$$" "${*}"  | tee /tmp/test-wrapper.log >/dev/null;"${@}";
+
+and details for step 7 being:
+
+    executable path: /usr/local/bin/test-script.sh
+    executable args: antimicrox-former-e-key-call
+
+then testing in notepad should:
+
+1. not produce any characters in notepad (e.g. step 6 should have removed the mapped key)
+2. and the invoked test script above should give you log output at `/tmp/test-wrapper.log` that looks similar to:
+
+    test-wrapper
+    start time: Wed Sep  3 03:10:47 PM EDT 2025
+    process id: 132555
+    passed args: antimicrox-former-e-key-call
+
+
+**XML setup:**
+
+    <gamecontroller configversion="19" appversion="3.5.1">
+      ...
+      <names>
+        <buttonname index="4">test-name</buttonname>
+        ...
+      </names>
+      <sets>
+        <set index="1">
+          ...
+          <button index="4"> <!-- Xbox 360 controller - "Y" button -->
+            <actionname>test-action</actionname>
+            <slots>
+              <slot>
+                <path>/usr/local/bin/test-wrapper.sh</path>
+                <arguments>antimicrox-former-e-key-call</arguments>
+                <mode>execute</mode>
+              </slot>
+            </slots>
+          </button>
+          ...
+        </set>
+      </sets>
+    </gamecontroller>
+
+
+---
+
+
+### [3.2 Double-tap input button mapping](#snippet-for-double-tap):
+
+This allows for defining a mapping that is triggered when the gamepad input is pressed twice in quick succession. See related wiki entry [here](https://github.com/AntiMicroX/antimicrox/wiki/Advanced-Assignments#double-tap).
+
+**Wiki description:**
+
+> This assignment type is possible using Cycle Zones and setting a Cycle Reset timer to make the button return the start of the assignment list. The time associated with the Release slots is very important since the time of the Release slots before the Cycle slot have to add up to the time used for the Cycle Reset.
+
+
+**GUI setup:**
+
+    Cycle Reset: 0.50 seconds
+    Release 0.01 -> Pause 0.00 -> Release 0.49 -> Cycle -> Release 0.01 -> D
+
+
+**XML setup:**
+
+    <gamecontroller configversion="19" appversion="3.5.1">
+      ...
+      <names>
+        <buttonname index="4">test-name</buttonname>
+        ...
+      </names>
+      <sets>
+        <set index="1">
+          ...
+          <button index="4"> <!-- Xbox 360 controller - "Y" button -->
+            <actionname>test-action</actionname>
+            <cycleresetactive>true</cycleresetactive> <!-- only present if you enabled "Auto Reset Cycle" option -->
+            <cycleresetinterval>500</cycleresetinterval> <!-- value in milliseconds for "Auto Reset Cycle" interval -->
+            <slots>
+              <slot>
+                <code>10</code> <!-- time value in milliseconds: 0m 0 .0 1s = 10ms -->
+                <mode>release</mode> <!-- "hold" for hold mode, "release" for release mode -->
+              </slot>
+              <slot>
+                <code>0</code> <!-- time value in milliseconds: 0m 0 .0 0s = 0ms -->
+                <mode>pause</mode>
+              </slot>
+              <slot>
+                <code>490</code> <!-- time value in milliseconds: 0m 0 .4 9s = 490ms -->
+                <mode>release</mode> <!-- "hold" for hold mode, "release" for release mode -->
+              </slot>
+              <slot>
+                <code>1</code> <!-- unknown -->
+                <mode>hold</mode> <!-- "cycle" for double-tap mode -->
+              </slot>
+              <slot>
+                <code>10</code> <!-- time value in milliseconds: 0m 0 .0 1s = 10ms -->
+                <mode>release</mode> <!-- "hold" for hold mode, "release" for release mode -->
+              </slot>
+              <slot>
+                <code>0x44</code> <!-- keyboard - "D" key -->
+                <mode>keyboard</mode>
+              </slot>
+            </slots>
+          </button>
+          ...
+        </set>
+      </sets>
+    </gamecontroller>
+
+
+---
+
+
+### [3.3 Single-tap and hold mappings for same input button](#snippet-for-tap-and-hold):
+
+This allows for defining two separate mappings on the same gamepad input: one when pressed once and one when held. In this case, the single-press mapping should not trigger if the button is held (this assumes that you have disabled the game from directly handling controller inputs and are defining only in antimicrox). See related wiki entry [here](https://github.com/AntiMicroX/antimicrox/wiki/Advanced-Assignments#tap-and-hold).
+
+
+**Wiki description:**
+
+> This assignment type is used to have different slots activated depending on whether a button is tapped or held down. One simple example for the use of this assignment type would be to allow Reload and Use to be assigned to the same button, such as the X button on an Xbox 360 controller, for use in Call of Duty. Typical assignments of this type will require the use of one hold zone and two release zones.
+
+> In the following example, Reload will be assigned to a button tap and Use will be mapped to a button hold. Reload (R) will be activated if a button is pressed for a duration of 0.01 - 0.49 seconds. Use (E) will be activated if a button is held for 0.50 seconds or longer. One important thing to mention is that no slot should be assigned to the final release zone. This will result in no slots being activated for that zone when a button has been held beyond the specified hold time.
+
+
+**GUI setup:**
+
+    Hold 0.50 -> E -> Release 0.01 -> R -> Release 0.49
+
+
+**XML setup:**
+
+    <gamecontroller configversion="19" appversion="3.5.1">
+      ...
+      <names>
+        <buttonname index="4">test-name</buttonname>
+        ...
+      </names>
+      <sets>
+        <set index="1">
+          ...
+          <button index="4"> <!-- Xbox 360 controller - "Y" button -->
+            <actionname>test-action</actionname>
+            <slots>
+              <slot>
+                <code>500</code> <!-- time value in milliseconds: 0m 0 .5 0s = 500ms -->
+                <mode>hold</mode> <!-- "hold" for hold mode, "release" for release mode -->
+              </slot>
+              <slot>
+                <code>0x45</code> <!-- keyboard - "E" key -->
+                <mode>keyboard</mode>
+              </slot>
+              <slot>
+                <code>10</code> <!-- time value in milliseconds: 0m 0 .0 1s = 10ms -->
+                <mode>release</mode> <!-- "hold" for hold mode, "release" for release mode -->
+              </slot>
+              <slot>
+                <code>0x52</code> <!-- keyboard - "R" key -->
+                <mode>keyboard</mode>
+              </slot>
+              <slot>
+                <code>490</code> <!-- time value in milliseconds: 0m 0 .4 9s = 490ms -->
+                <mode>release</mode> <!-- "hold" for hold mode, "release" for release mode -->
+              </slot>
+            </slots>
+          </button>
+          ...
+        </set>
+      </sets>
+    </gamecontroller>
+
+
+---
+
+
+### [3.4 Hold and double-tap mappings for same input button](#snippet-for-hold-plus-double-tap):
+
+**Wiki description:**
+
+> The Double Tap example can be slightly modified in order to allow for one assignment to be performed when a button is pressed once but a different assignment to be performed when a button is pressed twice.
+
+
+Note: The wiki entry [here](https://github.com/AntiMicroX/antimicrox/wiki/Advanced-Assignments#press-and-double-press) lists this as being for a single press mapping and double-tap mapping on the same input button. But in my testing (wireless xbox 360 controller on Fedora 42 w antimicrox v3.5.1), it seems to behave as one mapping for hold and one mapping for double-tap. After further testing, I believe that the timings may be slightly different from computer to computer and playing with the 2nd `Release` timing value can make a large difference. On my machine (AMD FX-9590), using the original `Release 0.49` (aka `490ms`) acted as a hold while using `Release 0.05` (aka `50ms`) gave me single press + double-press.
+
+In the example, the `A` keypress is sent when the input button is Held and `B` is the button sent when doing a double-tap.
+
+
+GUI setup:
+
+    Cycle Reset: 0.50 seconds
+    Release 0.01 -> Pause 0.00 -> Release 0.49 -> A -> Cycle -> Release 0.01 -> B
+
+XML setup:
+
+    <gamecontroller configversion="19" appversion="3.5.1">
+      ...
+      <names>
+        <buttonname index="4">test-name</buttonname>
+        ...
+      </names>
+      <sets>
+        <set index="1">
+          ...
+          <button index="4"> <!-- Xbox 360 controller - "Y" button -->
+            <actionname>test-action</actionname>
+            <cycleresetactive>true</cycleresetactive> <!-- only present if you enabled "Auto Reset Cycle" option -->
+            <cycleresetinterval>500</cycleresetinterval> <!-- value in milliseconds for "Auto Reset Cycle" interval -->
+            <slots>
+              <slot>
+                <code>10</code> <!-- time value in milliseconds: 0m 0 .0 1s = 10ms -->
+                <mode>release</mode> <!-- "hold" for hold mode, "release" for release mode -->
+              </slot>
+              <slot>
+                <code>0</code> <!-- time value in milliseconds: 0m 0 .0 0s = 0ms -->
+                <mode>pause</mode>
+              </slot>
+              <slot>
+                <code>490</code> <!-- time value in milliseconds: 0m 0 .4 9s = 490ms -->
+                <mode>release</mode> <!-- "hold" for hold mode, "release" for release mode -->
+              </slot>
+              <slot>
+                <code>0x41</code> <!-- keyboard - "A" key -->
+                <mode>keyboard</mode>
+              </slot>
+              <slot>
+                <code>10</code> <!-- time value in milliseconds: 0m 0 .0 1s = 10ms -->
+                <mode>release</mode> <!-- "hold" for hold mode, "release" for release mode -->
+              </slot>
+              <slot>
+                <code>0x42</code> <!-- keyboard - "B" key -->
+                <mode>keyboard</mode>
+              </slot>
+            </slots>
+          </button>
+          ...
+        </set>
+      </sets>
+    </gamecontroller>
+
+
+### [3.5 triple-tap](#triple-tap):
+
+I found that you can get a working triple-tap mapping using:
+
+GUI setup:
+
+    Cycle Reset: 0.50 seconds
+    Cycle -> Cycle -> T
+
+but that there are some caveats that make it impractical for actual use:
+
+1. If you did not disable game from directly reading controller input, then like above examples, this will be useless bc the single-button presses will still be read in-game even if the triple-tap is read by antimicrox.
+2. Even if you did disable the game process directly processing controller input, in antimicrox, it still handles the double-tap before you turn it into a triple tap.
+
+So it is only useful IF you don't mind the first / second taps being applied before the double tap.
+
+I also tried a more sophisticated approach where I stepped down with different timings, e.g.
+
+GUI setup:
+
+    Cycle Reset: 0.50 seconds
+    Release 0.01 -> Pause 0.00 -> Release 0.5 -> L -> Release 0.01 -> S -> Cycle -> Release 0.01 -> D -> Cycle -> Release 0.01 -> T
+
+e.g. hold: L (long), single: S, double: D, triple: T
+
+but what I saw in testing was the all triple presses resulted in `dt`, just like with the simpler definition.
+
+It's possible there's a way to do this where held/single/double/triple/etc presses remain separate and I just haven't figured it out but also possible that it's not supported.
+
+I also noticed that (at least as of AntiMicroX v3.5.1), multiple `Auto Reset Cycle` settings are NOT supported. So if you change `Auto Reset Cycle` settings, then whatever the last settings used were will apply for ALL cycles bound on this input button. You can confirm this by studying the xml and noticing that even if you change things after the first `Cycle` defintion, you will still always only have a single flag for reset cycle on/off and a single interval value.
+
+
+
+### [3.6 WIP / Other combos](#wip-other-combos):
+
+So far, I haven't been able to find any other useful combos. I may add some examples later for switching profiles.
+
+
+---
+
+## [4. Interesting feature requests/issues/discussions](#bookmarked-issues)
+
+Set Profile "while held" not working for same button in different profile
+https://github.com/AntiMicroX/antimicrox/discussions/1028
+
+gamepad - multiple mappings (advanced)
+https://github.com/AntiMicroX/antimicrox/discussions/1077
+
+❗Looking for a new maintainer for AntiMicroX❗
+https://github.com/AntiMicroX/antimicrox/discussions/1171
+
+Feature Request: Functions
+https://github.com/AntiMicroX/antimicrox/issues/11
+
+Wayland support for keyboard emulation
+https://github.com/AntiMicroX/antimicrox/issues/32
+-> sounds like this was implemented some time ago
+
+Remove/resurrect key repeat functionality.
+https://github.com/AntiMicroX/antimicrox/issues/115
+
+[Feature Request] Popup on changing the set
+https://github.com/AntiMicroX/antimicrox/issues/122
+
+More zones in Triggers and 1-axis analog inputs
+https://github.com/AntiMicroX/antimicrox/issues/179
+
+Remake advanced key assignment dialog
+https://github.com/AntiMicroX/antimicrox/issues/284
+
+Implement triggering action after pressing combination of controller buttons
+https://github.com/AntiMicroX/antimicrox/issues/298
+
+Allow set switching to be triggered by keyboard/mouse buttons/combos.
+https://github.com/AntiMicroX/antimicrox/issues/302
+
+Feature Request: Joystick modifier threshold (Walk/Run without a dedicated sprint button)
+https://github.com/AntiMicroX/antimicrox/issues/310
+-> this was my request to be able to do walk/run.
+-> implemented. verbiage is different from my mockup but probably makes more sense
+-> see https://github.com/AntiMicroX/antimicrox/pull/458
+
+Improve process execution
+https://github.com/AntiMicroX/antimicrox/issues/374
+
+Advanced joined keys not working in 3.2.5
+https://github.com/AntiMicroX/antimicrox/issues/505
+-> possible wayland relevance
+
+Option for microphone controls in custom keybinds
+https://github.com/AntiMicroX/antimicrox/issues/545
+
+Standard tap+hold mapping arrangement not behaving as expected/as it did in pre-fork antimicro
+https://github.com/AntiMicroX/antimicrox/issues/638
+
+Button press when joystick is inside deadzone
+https://github.com/AntiMicroX/antimicrox/issues/684
+
+"Release all Toggled buttons" in Advanced Options.
+https://github.com/AntiMicroX/antimicrox/issues/690
+
+UI Key Input button: Fix wrong keys for Wayland input
+https://github.com/AntiMicroX/antimicrox/issues/721
+
+Allow for execution on set change
+https://github.com/AntiMicroX/antimicrox/issues/751
+
+Set change while held on a distance threshold.
+https://github.com/AntiMicroX/antimicrox/issues/752
+
+Set selection: "while held AND any action in activated set is resolved"
+https://github.com/AntiMicroX/antimicrox/issues/765
+
+Ability to Set "Set" from Command Line?
+https://github.com/AntiMicroX/antimicrox/issues/775
+
+Create easy to edit mapping format for AntiMicroX
+https://github.com/AntiMicroX/antimicrox/issues/832
+-> had been hoping this was about using json/etc instead of xml but this is more about using spreadsheets instead of gui
+
+The problem when identifying the button is held down
+https://github.com/AntiMicroX/antimicrox/issues/859
+
+[Feature Request] Options to disable Accelerometer and Gyroscope
+https://github.com/AntiMicroX/antimicrox/issues/892
+
+"Update Joysticks": please add an interval setting or a shortcut
+https://github.com/AntiMicroX/antimicrox/issues/1111
+
+Original controller button still firing when remapped to a keyboard key
+https://github.com/AntiMicroX/antimicrox/issues/1119
+
+Option to COMPLETELY DISABLE processing/mapping for specific controllers
+https://github.com/AntiMicroX/antimicrox/issues/1193
+
+===========================================================================================
