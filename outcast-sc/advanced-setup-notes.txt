@@ -1,0 +1,82 @@
+for advanced setup:
+
+this is intended to overlay on top of the game's existing vanilla mapping to provide extra functionality without needing to still use the keyboard as much.
+
+The changes are only for certain buttons. First, let's describe what those buttons do in the game before AntiMicroX / remaps are introduced.
+
+| Xbox button (Default game mappings) | Context(s)     | Description |
+|:-----------------------------------:|:--------------:|:-----------:|
+| Guide button                        | all            | not used    |
+| Left  stick (click)                 | all            | not used    |
+| Right stick (click)                 | all            | cycle map modes (off, mini, full) |
+| Y button                            | pause menu     | show controls |
+| Right bumper / right shoulder       | controls menu  | switch between keyboard and gamepad controls |  
+| Y button                            | pause menu     | show controls |
+| Left  bumper / left  shoulder       | world          | crouch |  
+| Right bumper / right shoulder       | world          | sprint or roll |  
+| A button                            | binoculars     | toggle xray mode |
+| X button                            | xray mode      | lock target |
+| X button                            | dialog         | skip current line of dialog |
+| Left  trigger                       | world          | aim    |
+| Right trigger                       | world          | fire weapon |
+| back button                         | world          | weapon selection screen |
+| start button                        | world          | pause menu |
+| A button                            | world          | jump |
+| B button                            | world          | inventory/notes menu |
+| X button                            | world          | interact / contextual action |
+| Y button                            | world          | drop item in backpack |
+| dpad up                             | world          | switch weapon to UZA-SH1 (uzi pistol) |
+| dpad right                          | world          | switch weapon to HAWK-MK8 (energy pistol) | 
+| dpad down                           | world          | switch weapon to LN-DUO 500 (grenade launcher) |
+| dpad left                           | world          | switch weapon to FT 74-X (flame thrower) |
+
+from this, we can see guide button and left stick are completely open / free to use without any conflicts.
+
+Everything else, the single-button click is still interpretted by the game even if we map extra functionality to double-click or hold so a lot of these like start/back/b-button won't work (since the keypress would happen after a menu that would block said keypress) or might be inconvenient (e.g. left/right triggers and right should already have single-tap and hold functionality defined and shooting when double-tapping or holding would not be good).
+
+- A (jump) does require holding / more precise tapping sometimes for longer/shorter jet-pack assists when jumping, if you are trying to be precise. So it's not really a good candidate for extra mappings either.
+
+- Y only has an effect when an item is equipped in the hand slot and even then, it simply puts the item back into the inventory.
+
+- X only has an effect when interating with something (reloading happens automatically or can sometimes be triggered on single-click but that isn't really inconvenient anyway)
+
+- LB (crouching) is a toggle and easily undone. Ditto w D-pad weapon selections.
+
+
+Mouse and keyboard bindings that don't have any mappings/selection on the default controller layout (e.g. require you to equip via inventory or use kb):
+
+| Keyboard shortcut | Action |
+|:-----------------:|:------:|
+| F1                | Gaamsavv (save game menu) |
+| F2                | Medikit       | 
+| F3                | E.V.D. (binoculars) | 
+| F4                | PPS (Invisibility)  | 
+| F5                | UBIK-0A (Hologram decoy) | 
+| F6                | Dynamite  | 
+| F7                | CLAPR-T (remote detonator for dynamite) | 
+| F8                | THNDR-STP33 (proximity detonator) | 
+| F9                | Health Plant  | 
+| F10               | Hoti (Twon-ha lure) |
+| 1                 | switch weapon to HK-P12 (starting pistol) |
+| 3                 | switch weapon to SLNT-B (sniper dart rifle) |
+
+Given this, here's what I'm mapping things to:
+
+| Xbox controller mapping        | Keypress | Action                                      |
+|:------------------------------:|:--------:|:-------------------------------------------:|
+| Guide button (single-press)    | F1       | Gaamsavv (save game menu)                   |
+| Left stick (single-press)      | F2       | Medikit                                     | 
+| Dpad UP (held for 0.5 sec)     | 1        | Vanilla + equip HK-P12 (starting pistol)    |
+| Dpad RIGHT (held for 0.5 sec)  | F6       | Vanilla + equip Dynamite                    |
+| Dpad DOWN (held for 0.5 sec)   | F8       | Vanilla + equip proximity mines             |
+| Dpad LEFT (held for 0.5 sec)   | 3        | Vanilla + equip SLNT-B (sniper dart rifle)  |
+| Left bumper (single-press)     | ---      | Vanilla behavior (crouch toggle)            |
+| Left bumper (double-tap) )     | F5       | Vanilla + equip holo decoy                  | 
+| Left-bumper (held for 0.5 sec) | F4       | Vanilla + equip invisibility                | 
+| X button (single-press)        | ---      | Vanilla behavior (interact/reload)          | 
+| X button (double-tap)          | F9       | Vanilla + equip Health plant                | 
+| X button (held for 0.5 sec)    | F10      | Vanilla + equip Hoti                        | 
+| Y button (single-press)        | ---      | Vanilla behavior (stow hand item)           | 
+| Y button (double-tap)          | F3       | Vanilla + equip binoculars                  | 
+| Y button (held for 0.5 sec)    | F7       | Vanilla + equip remote detonator            | 
+
