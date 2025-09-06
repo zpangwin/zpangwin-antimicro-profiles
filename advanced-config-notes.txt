@@ -317,12 +317,17 @@ Note: The wiki entry [here](https://github.com/AntiMicroX/antimicrox/wiki/Advanc
 In the example, the `A` keypress is sent when the input button is Held and `B` is the button sent when doing a double-tap.
 
 
-GUI setup:
+GUI setup (single-tap + double-tap):
+
+    Cycle Reset: 0.50 seconds
+    Release 0.01 -> Pause 0.00 -> Release 0.05 -> A -> Cycle -> Release 0.01 -> B
+
+GUI setup (hold + double-tap):
 
     Cycle Reset: 0.50 seconds
     Release 0.01 -> Pause 0.00 -> Release 0.49 -> A -> Cycle -> Release 0.01 -> B
 
-XML setup:
+XML setup (hold + double-tap):
 
     <gamecontroller configversion="19" appversion="3.5.1">
       ...
