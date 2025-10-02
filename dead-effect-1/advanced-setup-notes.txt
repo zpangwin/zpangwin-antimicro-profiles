@@ -1,0 +1,68 @@
+
+for advanced setup:
+
+same as default for movement / look controls (e.g. thumbsticks) and aim / fire (e.g. triggers)
+
+| Xbox Controller Mapping | Keyboard shortcut | Action                        |
+|:-----------------------:|:-----------------:|:-----------------------------:|
+| Left Stick (click)      | Left Shift        | Sprint (no change)            |
+| Right stick (click)     | C                 | Crouch (no change)            |
+| Back Button             | H                 | Objective Helper  (no change) |
+| Start Button            | Escape            | Menu (no change)              |
+| Left Bumper             | T                 | Bullet Time (no change)       |
+| Right Bumper            | Y                 | Devastation (no change)       |
+| A Button                | Space             | Use (no change)               |
+| B Button                | Escape            | Exit (no change)              |
+
+the actual changes are:
+
+| Xbox Controller Mapping | Keyboard shortcut | Action                        |
+|:-----------------------:|:-----------------:|:-----------------------------:|
+| Guide Button            | P                 | Panic                         |
+| X Button (Press)        | R                 | Reload                        |
+| X Button (Hold)         | F                 | Flashlight                    |
+| Y Button (Press)        | Mouse wheel down  | Next Weapon                   |
+| Y Button (Hold)         | Mouse wheel up    | Previous Weapon               |
+| Dpad Up                 | 4                 | Grenade/Tripmine              |
+| Dpad Right              | 3                 | Primary Weapon (no change)    |
+| Dpad Down               | 2                 | Secondary Weapon              |
+| Dpad Left               | 1                 | Paralyzer (no change)         |
+
+[[][
+Defaults:
+
+| Xbox Controller Mapping | Keyboard shortcut | Generic Gamepad Mapping | Action           |
+|:-----------------------:|:-----------------:|:-----------------------:|:----------------:|
+| Left thumbstick up      | W                 | Joystick 1 Axis 2-      | Move Forward     |
+| Left thumbstick down    | S                 | Joystick 1 Axis 2+      | Move Backward    |
+| Left thumbstick left    | A                 | Joystick 1 Axis 1-      | Move Left        |
+| Left thumbstick right   | D                 | Joystick 1 Axis 1+      | Move Right       |
+| Right thumbstick up     | Up Arrow          | Joystick 1 Axis 5-      | Aim Up           |
+| Right thumbstick down   | Down Arrow        | Joystick 1 Axis 5+      | Aim Down         |
+| Right thumbstick left   | Left Arrow        | Joystick 1 Axis 4-      | Aim Left         |
+| Right thumbstick right  | Right Arrow       | Joystick 1 Axis 4+      | Aim Right        |
+| Right Trigger           | Left Mouse        | Joystick 1 Axis 10+     | Fire             |
+| Left Trigger            | Right Mouse       | Joystick 1 Axis 9+      | Aim              |
+| Y Button                | R                 | Joystick 1 Button 3     | Reload           |
+| (empty)                 | Mouse wheel up    | (empty)                 | Previous Weapon  |
+| (empty)                 | Mouse wheel down  | (empty)                 | Next Weapon      |
+| Left Bumper             | T                 | Joystick 1 Button 4     | Bullet Time      |
+| Right Bumper            | Y                 | Joystick 1 Button 5     | Devastation      |
+| A Button                | Space             | Joystick 1 Button 0     | Use              |
+| (empty)                 | Q                 | (empty)                 | Turn 180 Left    |
+| (empty)                 | E                 | (empty)                 | Turn 180 Right   |
+| Start Button            | Escape            | Joystick 1 Button 7     | Menu             |
+| B Button                | Escape            | Joystick 1 Button 1     | Exit             |
+| (empty)                 | P                 | (empty)                 | Panic            |
+| Back Button             | H                 | Joystick 1 Button 6     | Objective Helper |
+| (empty)                 | G                 | (empty)                 | Grenade/Tripmine |
+| X Button                | F                 | Joystick 1 Button 2     | Flashlight       |
+| Right stick (click)     | C                 | Joystick 1 Button 9     | Crouch           |
+| Dpad Left               | 1                 | Joystick 1 Axis 6-      | Paralyzer        |
+| Dpad Up                 | 2                 | Joystick 1 Axis 7+      | Secondary Weapon |
+| Dpad Right              | 3                 | Joystick 1 Axis 6+      | Primary Weapon   |
+| Dpad Down               | 4                 | Joystick 1 Axis 7-      | Grenade/Tripmine |
+| Left Stick (click)      | Left Shift        | Joystick 1 Button 8     | Sprint           |
+| Guide Button            | ---               | ---                     | (no action)      |
+
+
