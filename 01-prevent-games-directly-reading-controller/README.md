@@ -35,11 +35,11 @@ Also, you don't need to do *ALL* of these methods... just one. If you try one an
 
 | Platform                       | Option(s) |
 |:------------------------------:|:-------:|
-| Linux (using Proton/Proton-GE) | [Disable SDL]((#option-2-disable-sdl-wine-or-proton-games), |
-| Linux (using wine/bottles)     | [Disable SDL]((#option-2-disable-sdl-wine-or-proton-games), |
-| Linux (using native games)     | ??? (maybe SteamInput?) |
+| Linux (using Proton/Proton-GE) | [Disable SteamInput](#option-1-disable-steam-input-any-system), [Disable SDL](#option-2-disable-sdl-wine-or-proton-games), [others](https://github.com/AntiMicroX/antimicrox/wiki/Methods-for-Disabling-Joystick-Reading-in-Linux#wine-games) |
+| Linux (using wine/bottles)     | [Disable SteamInput](#option-1-disable-steam-input-any-system),, [Disable SDL](#option-2-disable-sdl-wine-or-proton-games), [others](https://github.com/AntiMicroX/antimicrox/wiki/Methods-for-Disabling-Joystick-Reading-in-Linux#wine-games) |
+| Linux (using native games)     | [Disable SteamInput](#option-1-disable-steam-input-any-system)?, [others](https://github.com/AntiMicroX/antimicrox/wiki/Methods-for-Disabling-Joystick-Reading-in-Linux#wine-games)? |
 | Windows                        | [HideHide](https://github.com/nefarius/HidHide) |
-| Mac                            | ??? (maybe SteamInput?) |
+| Mac                            | [Disable SteamInput](#option-1-disable-steam-input-any-system)? |
 
 
 ## Option 1: Disable Steam Input (Any System)
