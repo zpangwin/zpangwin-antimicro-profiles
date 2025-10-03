@@ -13,11 +13,18 @@ Also, you don't need to do *ALL* of these methods... just one. If you try one an
 # Table of Contents
 
 - [Options by Platform](#options-by-platform)
-- [Option 1: Disable Steam Input](#option-1-disable-steam-input)
-- [Option 2: Disable SDL2 (Wine or Proton games)](#option-2-disable-sdl2-wine-or-proton-games)
+- [Option 1: Disable Steam Input (Linux)](#option-1-disable-steam-input-any-system)
+- [Option 2: Disable SDL (Wine or Proton games)](#option-2-disable-sdl-wine-or-proton-games)
  - [Option 2, method A: wine controller gui](#option-2-method-a-wine-controller-gui)
  - [Option 2, method B: regedit](#option-2-method-b-regedit)
  - [Option 2, method C: system.reg](#option-2-method-c-systemreg)
+- [Option 3: Hotplugging (older games on any system)](#option-3-hotplugging-older-games-on-any-system)
+- [Option 4: SDL Environment Variable (Linux)](#option-4-sdl-environment-variable-linux)
+- [Option 5: SDLHack (Linux)](#option-5-sdlhack-linux)
+- [Option 6: Disable Read Access (Linux)](#option-6-disable-read-access-linux)
+- [Option 7: Different User (Linux)](#option-different-user-linux)
+- [Option 8: WIP / Experimental (Linux)](#option-wip-experimental-linux)
+- [Option 9: HideHide (Windows)](#option-hidhide-windows)
 - [Appendix A: How to find WINEPREFIX (using Wine)](#appendix-a-how-to-find-wineprefix-using-wine)
 - [Appendix B: How to find wine binary (using Wine)](#appendix-b-how-to-find-wine-binary-using-wine)
 - [Appendix C: How to find WINEPREFIX (using Proton)](#appendix-c-how-to-find-wineprefix-using-proton)
@@ -28,14 +35,14 @@ Also, you don't need to do *ALL* of these methods... just one. If you try one an
 
 | Platform                       | Option(s) |
 |:------------------------------:|:-------:|
-| Linux (using Proton/Proton-GE) | |
-| Linux (using wine/bottles)     | |
+| Linux (using Proton/Proton-GE) | [Disable SDL]((#option-2-disable-sdl-wine-or-proton-games), |
+| Linux (using wine/bottles)     | [Disable SDL]((#option-2-disable-sdl-wine-or-proton-games), |
 | Linux (using native games)     | ??? (maybe SteamInput?) |
 | Windows                        | [HideHide](https://github.com/nefarius/HidHide) |
 | Mac                            | ??? (maybe SteamInput?) |
 
 
-## Option 1: Disable Steam Input
+## Option 1: Disable Steam Input (Any System)
 
 Sometimes you can get lucky and simply disable a game from reading the input via Steam's per-game settings.
 
@@ -48,7 +55,7 @@ This is correct for the Beta version of the Linux Steam Client as of October 202
 
 
 
-## Option 2: Disable SDL2 (Wine or Proton games)
+## Option 2: Disable SDL (Wine or Proton games)
 
 This is the method I tend to use the most. There are several variations how you can go about it. The main differences between Wine and Proton in this context, are going to be the paths to the `WINEPREFIX` dir (for proton this is the `<steam>/compatdata/<steamid>/pfx` dir) and the binary you use. If you are comfortable backing up folders and directly editing wine/proton 'system.reg' files, that is even faster/easier in my opinion but I will cover each of the ways I know of to disable SDL2.
 
@@ -182,7 +189,7 @@ For now, see [AntiMicroX's wiki page](https://github.com/AntiMicroX/antimicrox/w
 
 
 
-## Option 4: SDL 2 Environment Variable (Linux)
+## Option 4: SDL Environment Variable (Linux)
 
 TODO
 
@@ -230,8 +237,7 @@ I think firejail also had something related to hidraw. Might look into whether f
 
 
 
-
-## Option 9: HideHide (Windows-only)
+## Option 9: HideHide (Windows)
 
 Disclaimer: I have not tried this myself and can't really say if it does as advertised. Just throwing it out there as a possibility, it's up to you to do your own research / virus scans / testing / etc.
 
