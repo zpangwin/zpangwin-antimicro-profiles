@@ -72,7 +72,7 @@ From there, you should be done but it's always a good idea to load the game up f
 The wine command for regedit should look something like:
 
 ```bash
-    WINEPREFIX="/path/to/your/wine/prefix" wine64 control joy.cpl
+    WINEPREFIX="/path/to/your/wine/prefix" wine control joy.cpl
 ```
 
 note: if you are not running this from the terminal but instead using a `.desktop` file or app launcher, then you may need to replace `$HOME` with its expanded value (e.g. `/home/YOUR_USER_NAME_HERE`)
@@ -82,7 +82,7 @@ The proton command for regedit should look something like
 
 ```bash
     WINEPREFIX="$HOME/.steam/steam/steamapps/compatdata/<YOUR_GAME_ID>/pfx" \
-    "/media/ssd/SteamLibrary/steamapps/common/Proton - Experimental/files/bin/wine64" \
+    "/media/ssd/SteamLibrary/steamapps/common/Proton - Experimental/files/bin/wine" \
     control joy.cpl
 ```
 
@@ -122,7 +122,7 @@ From there, you should be done but it's always a good idea to load the game up f
 The wine command for regedit should look something like:
 
 ```bash
-    WINEPREFIX="/path/to/your/wine/prefix" wine64 regedit
+    WINEPREFIX="/path/to/your/wine/prefix" wine regedit
 ```
 
 note: if you are not running this from the terminal but instead using a `.desktop` file or app launcher, then you may need to replace `$HOME` with its expanded value (e.g. `/home/YOUR_USER_NAME_HERE`)
@@ -132,7 +132,7 @@ The proton command for regedit should look something like
 
 ```bash
     WINEPREFIX="$HOME/.steam/steam/steamapps/compatdata/<YOUR_GAME_ID>/pfx" \
-    "/media/ssd/SteamLibrary/steamapps/common/Proton - Experimental/files/bin/wine64" \
+    "/media/ssd/SteamLibrary/steamapps/common/Proton - Experimental/files/bin/wine" \
     regedit
 ```
 
