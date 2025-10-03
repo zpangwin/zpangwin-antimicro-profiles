@@ -24,7 +24,7 @@ Also, you don't need to do *ALL* of these methods... just one. If you try one an
 - [Option 6: Disable Read Access (Linux)](#option-6-disable-read-access-linux)
 - [Option 7: Different User (Linux)](#option-different-user-linux)
 - [Option 8: WIP / Experimental (Linux)](#option-wip-experimental-linux)
-- [Option 9: HideHide (Windows)](#option-hidhide-windows)
+- [Option 9: HidHide (Windows)](#option-hidhide-windows)
 - [Appendix A: How to find WINEPREFIX (using Wine)](#appendix-a-how-to-find-wineprefix-using-wine)
 - [Appendix B: How to find wine binary (using Wine)](#appendix-b-how-to-find-wine-binary-using-wine)
 - [Appendix C: How to find WINEPREFIX (using Proton)](#appendix-c-how-to-find-wineprefix-using-proton)
@@ -38,7 +38,7 @@ Also, you don't need to do *ALL* of these methods... just one. If you try one an
 | Linux (using Proton/Proton-GE) | [Disable SteamInput](#option-1-disable-steam-input-any-system), [Disable SDL](#option-2-disable-sdl-wine-or-proton-games), [others](https://github.com/AntiMicroX/antimicrox/wiki/Methods-for-Disabling-Joystick-Reading-in-Linux#wine-games) |
 | Linux (using wine/bottles)     | [Disable SteamInput](#option-1-disable-steam-input-any-system),, [Disable SDL](#option-2-disable-sdl-wine-or-proton-games), [others](https://github.com/AntiMicroX/antimicrox/wiki/Methods-for-Disabling-Joystick-Reading-in-Linux#wine-games) |
 | Linux (using native games)     | [Disable SteamInput](#option-1-disable-steam-input-any-system)?, [others](https://github.com/AntiMicroX/antimicrox/wiki/Methods-for-Disabling-Joystick-Reading-in-Linux#wine-games)? |
-| Windows                        | [HideHide](https://github.com/nefarius/HidHide) |
+| Windows                        | [[Disable SteamInput](#option-1-disable-steam-input-any-system)?, HidHide](https://github.com/nefarius/HidHide) |
 | Mac                            | [Disable SteamInput](#option-1-disable-steam-input-any-system)? |
 
 
@@ -237,7 +237,7 @@ I think firejail also had something related to hidraw. Might look into whether f
 
 
 
-## Option 9: HideHide (Windows)
+## Option 9: HidHide (Windows)
 
 Disclaimer: I have not tried this myself and can't really say if it does as advertised. Just throwing it out there as a possibility, it's up to you to do your own research / virus scans / testing / etc.
 
