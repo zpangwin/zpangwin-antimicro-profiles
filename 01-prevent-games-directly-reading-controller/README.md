@@ -81,13 +81,15 @@ note: if you are not running this from the terminal but instead using a `.deskto
 The proton command for regedit should look something like
 
 ```bash
-WINEPREFIX="$HOME/.steam/steam/steamapps/compatdata/15130/pfx" "/media/ssd/SteamLibrary/steamapps/common/Proton - Experimental/files/bin/wine64" control joy.cpl
+    WINEPREFIX="$HOME/.steam/steam/steamapps/compatdata/<YOUR_GAME_ID>/pfx" \
+    "/media/ssd/SteamLibrary/steamapps/common/Proton - Experimental/files/bin/wine64" \
+    control joy.cpl
 ```
 
 alternately, you can use [protontricks](https://github.com/Matoking/protontricks) but sometimes users have issues with it.
 
 
-In either case, you should see a GUI dialog come up with the title "Game Controllers" similarly to [AntiMicroX's wiki page](https://github.com/AntiMicroX/antimicrox/wiki/Methods-for-Disabling-Joystick-Reading-in-Linux#wine-games), though it will probably look a little different under new versions of wine. From here, you can either disable individual controllers or simply uncheck the "Enable SDL" checkbox. Then click the "Apply" button and "OK". Here is a pictur of mine on Fedora using the default wine from central repos (currently `wine-10.15 (Staging)`).
+In either case, you should see a GUI dialog come up with the title "Game Controllers" similarly to [AntiMicroX's wiki page](https://github.com/AntiMicroX/antimicrox/wiki/Methods-for-Disabling-Joystick-Reading-in-Linux#wine-games), though it will probably look a little different under new versions of wine. From here, you can either disable individual controllers or simply uncheck the "Enable SDL" checkbox. Then click the "Apply" button and "OK". Here is a picture of mine on Fedora using the default wine from central repos (currently `wine-10.15 (Staging)`).
 
 ![wine-control-joy-0-initial.png](https://github.com/zpangwin/zpangwin-antimicro-profiles/blob/master/01-prevent-games-directly-reading-controller/images/wine-control-joy-0-initial.png?raw=true)
 
@@ -129,7 +131,9 @@ note: if you are not running this from the terminal but instead using a `.deskto
 The proton command for regedit should look something like
 
 ```bash
-WINEPREFIX="$HOME/.steam/steam/steamapps/compatdata/15130/pfx" "/media/ssd/SteamLibrary/steamapps/common/Proton - Experimental/files/bin/wine64" regedit
+    WINEPREFIX="$HOME/.steam/steam/steamapps/compatdata/<YOUR_GAME_ID>/pfx" \
+    "/media/ssd/SteamLibrary/steamapps/common/Proton - Experimental/files/bin/wine64" \
+    regedit
 ```
 
 credit goes to /u/ZarathustraDK on reddit for sharing this technique [here](https://www.reddit.com/r/wine_gaming/comments/hf5u14/wine_control_panel_controller_configuration/). (note: hispost mentions deleting entries containing VID_3344 but you shouldn't need to do this to simply disable the controller from appearing)
