@@ -66,5 +66,5 @@ Note: Joysticks (Movement and Camera) and Trigger controls remain the same in bo
 
 ### Diagram
 
-![Preview of Layout](https://github.com/zpangwin/antimicro-profiles/raw/master/masseffect1/MassEffect-1-custom-mappings.png)
+![Preview of Layout](https://github.com/zpangwin/zpangwin-antimicro-profiles/blob/master/mass-effect1/MassEffect-1-custom-mappings.png?raw=true)
 

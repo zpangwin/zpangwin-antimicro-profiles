@@ -65,7 +65,7 @@ for example, if you selected `E` from the keyboard screen, then you will start w
 
 This horizontal row section actually has different click contexts. I will try to explain them as I understand them. Here is a picture to help visualize what I am talking about.
 
-[advanced-click-zones.png](https://github.com/zpangwin/zpangwin-antimicro-profiles/blob/master/00_images/advanced-dialog-nag-message.png?raw=true)
+![advanced-click-zones.png](https://github.com/zpangwin/zpangwin-antimicro-profiles/blob/master/00_images/advanced-dialog-nag-message.png?raw=true)
 
 in this picture, I've divided the row into 3 zones:
 

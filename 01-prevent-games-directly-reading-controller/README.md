@@ -89,18 +89,18 @@ alternately, you can use [protontricks](https://github.com/Matoking/protontricks
 
 In either case, you should see a GUI dialog come up with the title "Game Controllers" similarly to [AntiMicroX's wiki page](https://github.com/AntiMicroX/antimicrox/wiki/Methods-for-Disabling-Joystick-Reading-in-Linux#wine-games), though it will probably look a little different under new versions of wine. From here, you can either disable individual controllers or simply uncheck the "Enable SDL" checkbox. Then click the "Apply" button and "OK". Here is a pictur of mine on Fedora using the default wine from central repos (currently `wine-10.15 (Staging)`).
 
-[wine-control-joy-0-initial.png](https://github.com/zpangwin/zpangwin-antimicro-profiles/blob/master/01-prevent-games-directly-reading-controller/images/wine-control-joy-0-initial.png?raw=true)
+![wine-control-joy-0-initial.png](https://github.com/zpangwin/zpangwin-antimicro-profiles/blob/master/01-prevent-games-directly-reading-controller/images/wine-control-joy-0-initial.png?raw=true)
 
 and here is what it would look like if you unchecked "Enable SDL" (which will disable all controllers for the given WINEPREFIX):
 
-[wine-control-joy-1a-disabling-all-controllers.png](https://github.com/zpangwin/zpangwin-antimicro-profiles/blob/master/01-prevent-games-directly-reading-controller/images/wine-control-joy-1a-disabling-all-controllers.png?raw=true)
+![wine-control-joy-1a-disabling-all-controllers.png](https://github.com/zpangwin/zpangwin-antimicro-profiles/blob/master/01-prevent-games-directly-reading-controller/images/wine-control-joy-1a-disabling-all-controllers.png?raw=true)
 
 
 If you opt to disable a controller instead of turning of SDL completely, be aware that for XInput-capable controllers (like Xbox ones), it will basically move the controller between 3 states: Connected-via-DirectInput, Connected-via-XInput, and Disabled. So in this case, it would start off as a Connected XInput device, then you would select it and click Override. This would move it to be a Connected DirectInput device. You would then need to select it again and click Disable. It would then get moved under the Disabled devices list.
 
 Here's how that would look once it's all done:
 
-[wine-control-joy-1b-disabling-a-specific-controller.png](https://github.com/zpangwin/zpangwin-antimicro-profiles/blob/master/01-prevent-games-directly-reading-controller/images/wine-control-joy-1b-disabling-a-specific-controller.png?raw=true)
+![wine-control-joy-1b-disabling-a-specific-controller.png](https://github.com/zpangwin/zpangwin-antimicro-profiles/blob/master/01-prevent-games-directly-reading-controller/images/wine-control-joy-1b-disabling-a-specific-controller.png?raw=true)
 
 
 
